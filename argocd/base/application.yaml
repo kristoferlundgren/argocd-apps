@@ -36,7 +36,7 @@ spec:
             application.namespaces: "*"
 
   sources: []
-  project: default
+  project: infra
   syncPolicy:
     automated:
       enabled: true
