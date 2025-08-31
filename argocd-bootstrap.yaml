@@ -1,3 +1,4 @@
+# ArgoCD "infra" project, definition will immediately be replaced by ArgoCD Application
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
@@ -13,10 +14,12 @@ spec:
   - group: '*'
     kind: '*'
 ---
+# ArgoCD Application
+# It will take ownership of the manually deployed ArgoCD Helm Chart
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-bootstrap
+  name: infra
   namespace: argocd
   finalizers:
     # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
@@ -26,7 +29,7 @@ spec:
     namespace: argocd
     server: https://kubernetes.default.svc
   source:
-    path: argocd/base
+    path: infra
     repoURL: https://github.com/kristoferlundgren/argocd-apps.git
     targetRevision: main
   sources: []
