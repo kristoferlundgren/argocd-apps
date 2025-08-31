@@ -5,9 +5,12 @@ kind: AppProject
 metadata:
   name: default
 spec:
-  sourceRepos: []
+  sourceRepos:
+  - "https://github.com/kristoferlundgren/argocd-apps.git"
   sourceNamespaces: []
-  destinations: []
+  destinations:
+  - namespace: argocd
+    server: https://kubernetes.default.svc
   namespaceResourceBlacklist:
   - group: '*'
     kind: '*'
