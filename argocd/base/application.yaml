@@ -10,6 +10,17 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
+  project: infra
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  sources: []
   source:
     # https://artifacthub.io/packages/helm/argo/argo-cd
     repoURL: https://argoproj.github.io/argo-helm
@@ -17,7 +28,6 @@ spec:
     chart: argo-cd
     helm:
       releaseName: argocd
-
       valuesObject:
         #global:
         #  domain: argocd.example.com
@@ -34,15 +44,3 @@ spec:
         configs:
           params:
             application.namespaces: "*"
-
-  sources: []
-  project: infra
-  syncPolicy:
-    automated:
-      enabled: true
-      prune: true
-      selfHeal: true
-      allowEmpty: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true

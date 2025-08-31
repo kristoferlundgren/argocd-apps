@@ -1,4 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: infra
+spec:
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: argocd-bootstrap
@@ -15,7 +29,7 @@ spec:
     repoURL: https://github.com/kristoferlundgren/argocd-apps.git
     targetRevision: main
   sources: []
-  project: default
+  project: infra
   syncPolicy:
     automated:
       enabled: true
