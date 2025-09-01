@@ -7,10 +7,10 @@ metadata:
     # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
     - resources-finalizer.argocd.argoproj.io
 spec:
+  project: infra
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  project: infra
   syncPolicy:
     automated:
       enabled: true
@@ -20,7 +20,6 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-  sources: []
   source:
     # https://artifacthub.io/packages/helm/argo/argo-cd
     repoURL: https://argoproj.github.io/argo-helm
